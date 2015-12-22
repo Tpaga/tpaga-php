@@ -39,7 +39,7 @@ $config->setUsername('d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2');
 $apiClient = new Tpaga\ApiClient($config);
 
 $charge = new Tpaga\Model\CreditCardCharge();
-$charge->setCreditCard("atbf8sg2bvss8u9irh76qc359svtp05n");
+$charge->setCreditCard("14bhmsn3t1ats1i0poqsakun8f67970f");
 $charge->setAmount(20000);
 $charge->setTaxAmount(200);
 $charge->setCurrency("COP");
