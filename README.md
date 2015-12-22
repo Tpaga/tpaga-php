@@ -35,7 +35,7 @@ Simple usage looks like:
 
 ```php
 $config= new Tpaga\Configuration();
-$config->setUsername('9jk59hpr858j34oibplotp839pdm7mau');
+$config->setUsername('d13fr8n7vhvkuch3lq2ds5qhjnd2pdd2');
 $apiClient = new Tpaga\ApiClient($config);
 
 $charge = new Tpaga\Model\CreditCardCharge();
