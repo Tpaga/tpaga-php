@@ -47,6 +47,7 @@ function create_customer() {
 
     $GLOBALS["config"]->setUsername($GLOBALS["private_token"]);
 
+    // see the "Customer" model in the parameters section at http://tpaga.co/docs/swaggers/v2#!/Customer/createCustomer
     $customer = new Tpaga\Model\Customer();
     $customer->setFirstName("Numa");
     $customer->setLastName("Nigerio");
@@ -76,6 +77,7 @@ function tokenize_credit_card() {
     $cctoken->setExpirationYear("2020");
     $cctoken->setCardHolderName("John Smith");
 
+    // see the "CreditCardToken" model in the parameters section at http://tpaga.co/docs/swaggers/v2#!/Credit_Card/tokenizeCreditCard
     $cctoken_api = new Tpaga\Api\tokenizeAPI($GLOBALS["apiClient"]);
 
     try {
@@ -107,6 +109,7 @@ function charge($cc_token) {
     $GLOBALS["config"]->setUsername($GLOBALS["private_token"]);
     $assoc_api = new Tpaga\Api\ChargeApi($GLOBALS["apiClient"]);
 
+    // see the "CreditCardCharge" model in the parameters section at http://tpaga.co/docs/swaggers/v2#!/Charge/addCreditCardCharge
     $charge = new Tpaga\Model\CreditCardCharge();
     $charge->setCreditCard($cc_token);
     $charge->setAmount(20000);
