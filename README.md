@@ -47,7 +47,6 @@ function create_customer() {
 
     $GLOBALS["config"]->setUsername($GLOBALS["private_token"]);
 
-    // see the "Customer" model in the parameters section at http://tpaga.co/docs/swaggers/v2#!/Customer/createCustomer
     $customer = new Tpaga\Model\Customer();
     $customer->setFirstName("Numa");
     $customer->setLastName("Nigerio");
@@ -77,7 +76,6 @@ function tokenize_credit_card() {
     $cctoken->setExpirationYear("2020");
     $cctoken->setCardHolderName("John Smith");
 
-    // see the "CreditCardToken" model in the parameters section at http://tpaga.co/docs/swaggers/v2#!/Credit_Card/tokenizeCreditCard
     $cctoken_api = new Tpaga\Api\tokenizeAPI($GLOBALS["apiClient"]);
 
     try {
@@ -107,9 +105,7 @@ function associate_token_to_customer($customer_id, $token) {
 function charge($cc_token) {
 
     $GLOBALS["config"]->setUsername($GLOBALS["private_token"]);
-    $assoc_api = new Tpaga\Api\ChargeApi($GLOBALS["apiClient"]);
 
-    // see the "CreditCardCharge" model in the parameters section at http://tpaga.co/docs/swaggers/v2#!/Charge/addCreditCardCharge
     $charge = new Tpaga\Model\CreditCardCharge();
     $charge->setCreditCard($cc_token);
     $charge->setAmount(20000);
@@ -124,6 +120,25 @@ function charge($cc_token) {
     try {
         $response = $charge_api->addCreditCardCharge($charge);
         var_dump($response);
+        return $response;
+    } catch (Exception $e) {
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+    }
+
+}
+
+function refund($charge_id) {
+
+    $GLOBALS["config"]->setUsername($GLOBALS["private_token"]);
+
+    $refund_request = new Tpaga\Model\CreditCardRefund();
+    $refund_request->setId($charge_id);
+    $refund_api = new Tpaga\Api\RefundApi($GLOBALS["apiClient"]);
+
+    try {
+        $response = $refund_api->refundCreditCardCharge($refund_request);
+        var_dump($response);
+        return $response;
     } catch (Exception $e) {
         echo 'Caught exception: ', $e->getMessage(), "\n";
     }
@@ -133,7 +148,8 @@ function charge($cc_token) {
 $customer = create_customer();
 $cctoken = tokenize_credit_card();
 $credit_card = associate_token_to_customer($customer->getId(), $cctoken);
-charge($credit_card->getId());
+$charge = charge($credit_card->getId());
+refund($charge->getId());
 ```
 
 ## Documentation
