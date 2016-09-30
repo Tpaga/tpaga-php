@@ -309,7 +309,7 @@ class CreditCard implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array("AMEX", "VISA", "MASTERCARD", "DINERS");
+        $allowed_values = array("AMEX", "VISA", "MASTERCARD", "DINERS", "CREDENCIAL");
         if (!in_array($type, $allowed_values)) {
             throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'AMEX', 'VISA', 'MASTERCARD', 'DINERS'");
         }
