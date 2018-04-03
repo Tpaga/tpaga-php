@@ -1,3 +1,7 @@
+# DEPRECATED #
+
+DO NOT USE THIS PROJECT.
+
 # tpaga-php
 TPAGA PHP Package
 
